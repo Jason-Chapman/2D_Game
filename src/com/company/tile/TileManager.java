@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 public class TileManager {
 
@@ -15,40 +16,39 @@ public class TileManager {
     public Tile[] tile;
     public int mapTileNum[][];
 
+
     public TileManager(GamePanel gp){
         this.gp= gp;
 
         tile = new Tile[10];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
-        loadMap("/maps/START1.txt");
+        loadMap("/maps/StartRoom.txt");
+
 
     }
     public void getTileImage(){
+
         try {
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Grass.png"));
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Black.png"));
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Wall.png"));
             tile[1].collision = true;
 
             tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Water.png"));
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/CornerTile.png"));
             tile[2].collision = true;
 
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Floor.png"));
 
             tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-            tile[4].collision = true;
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/MossyFloor.png"));
 
             tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
-
-            tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Black.png"));
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/CrackedFloor.png"));
 
         }catch (IOException e){
             e.printStackTrace();

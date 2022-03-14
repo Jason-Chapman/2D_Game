@@ -3,10 +3,7 @@ package com.company.entity;
 
 import com.company.GamePanel;
 import com.company.KeyHandler;
-import object.OBJ_Boots;
-import object.OBJ_Chest;
-import object.OBJ_Door;
-import object.OBJ_Key;
+import object.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -18,8 +15,14 @@ public class Player extends Entity {
 
 
     KeyHandler KeyH;
+    Random random = new Random();
+    int floorCount = 1;
+    int highRoomCount = 5;
+    int lowRoomCount = 1;
+    int floorRoomCount = 1;
+    int maxRoomCount = 3;
+    boolean open = false;
 
-    int oldRoom;
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
@@ -140,76 +143,194 @@ public class Player extends Entity {
                 case "Door":
                     if (hasKey >0){
                         gp.playSE(3);
-                        Random random = new Random();
-                        int nextRoom = random.nextInt(2); // CHANGE 2 -> (APPROPRIATE NUMBER), WHEN ADDING NEW DUNGEON ROOMS
 
-                        while (nextRoom == oldRoom) { // MAKES IT SO THAT YOU CANNOT GENERATE THE SAME ROOM TWICE IN A ROW
-                            nextRoom = random.nextInt(2);
-                        }
+                        if (floorRoomCount == 0) {
+                            floorRoomCount--;
+                            gp.ui.floorRoomCount = floorRoomCount;
+                            worldX = 1100;
+                            worldY = 1000;
 
-                        if (nextRoom == 0) {
                             for (int j = 0; j < 8; j++) {
                                 gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                             }
 
-                            gp.obj[0]= new OBJ_Key(); // CREATES NEW KEY
-                            gp.obj[0].worldX = 23* gp.tileSize;
-                            gp.obj[0].worldY = 19*gp.tileSize;
+                            gp.obj[0]= new OBJ_Ladder();
+                            gp.obj[0].worldX = 35* gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
 
-                            gp.obj[4]  = new OBJ_Door(); // CREATES NEW ROOM DOOR
-                            gp.obj[4].worldX = 26 * gp.tileSize;
-                            gp.obj[4].worldY = 21*gp.tileSize;
-
-                            gp.obj[7]  = new OBJ_Boots(); // CREATES NEW ROOM BOOTS
-                            gp.obj[7].worldX = 23 * gp.tileSize;
-                            gp.obj[7].worldY= 23 *gp.tileSize;
-
-                            gp.tileM.loadMap("/maps/START1.txt"); // LOADS NEW ROOM
-                            oldRoom = 0;
+                            gp.tileM.loadMap("/maps/EndRoom.txt");
+                            hasKey--;
+                            gp.ui.showMessage("You opened the door!");
                         }
-                        else if (nextRoom == 1) {
-                            for (int j = 0; j < 8; j++) {
-                                gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+                        else {
+                            int nextRoom = random.nextInt(7); // CHANGE 3 -> (APPROPRIATE NUMBER), WHEN ADDING NEW DUNGEON ROOMS
+
+                            if (nextRoom <= 3) { //COMBAT ROOM CHOSEN
+                                floorRoomCount--;
+                                gp.ui.floorRoomCount = floorRoomCount;
+                                worldX = 1100;
+                                worldY = 1000;
+                                for (int j = 0; j < 8; j++) {
+                                    gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+                                }
+
+                                gp.obj[1]= new OBJ_Key();
+                                gp.obj[1].worldX = 30* gp.tileSize;
+                                gp.obj[1].worldY = 21*gp.tileSize;
+
+                                gp.obj[2]  = new OBJ_Door();
+                                gp.obj[2].worldX = 38 * gp.tileSize;
+                                gp.obj[2].worldY = 21*gp.tileSize;
+
+                                gp.tileM.loadMap("/maps/CombatRoom.txt");
                             }
+                            else if (nextRoom == 4) { //TRAP ROOM CHOSEN
+                                floorRoomCount--;
+                                gp.ui.floorRoomCount = floorRoomCount;
+                                worldX = 1100;
+                                worldY = 1000;
+                                for (int j = 0; j < 8; j++) {
+                                    gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+                                }
 
-                            gp.obj[0]= new OBJ_Key();
-                            gp.obj[0].worldX = 23* gp.tileSize;
-                            gp.obj[0].worldY = 23*gp.tileSize;
+                                gp.obj[1]= new OBJ_Key();
+                                gp.obj[1].worldX = 23* gp.tileSize;
+                                gp.obj[1].worldY = 23*gp.tileSize;
 
-                            gp.obj[4]  = new OBJ_Door();
-                            gp.obj[4].worldX = 20 * gp.tileSize;
-                            gp.obj[4].worldY = 21*gp.tileSize;
+                                gp.obj[2]  = new OBJ_Door();
+                                gp.obj[2].worldX = 42 * gp.tileSize;
+                                gp.obj[2].worldY = 8*gp.tileSize;
 
-                            gp.obj[6]  = new OBJ_Chest();
-                            gp.obj[6].worldX = 23 * gp.tileSize;
-                            gp.obj[6].worldY = 19 *gp.tileSize;
+                                gp.tileM.loadMap("/maps/TrapRoom1.txt");
+                            }
+                            else if (nextRoom == 5) { //TRAP ROOM CHOSEN
+                                floorRoomCount--;
+                                gp.ui.floorRoomCount = floorRoomCount;
+                                worldX = 1100;
+                                worldY = 1000;
+                                for (int j = 0; j < 8; j++) {
+                                    gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+                                }
 
-                            gp.tileM.loadMap("/maps/START2.txt");
-                            oldRoom = 1;
+                                gp.obj[1]= new OBJ_Key();
+                                gp.obj[1].worldX = 23* gp.tileSize;
+                                gp.obj[1].worldY = 23*gp.tileSize;
+
+                                gp.obj[2]  = new OBJ_Door();
+                                gp.obj[2].worldX = 42 * gp.tileSize;
+                                gp.obj[2].worldY = 34*gp.tileSize;
+
+                                gp.tileM.loadMap("/maps/TrapRoom2.txt");
+                            }
+                            else if (nextRoom == 6) { //TREASURE ROOM CHOSEN
+                                hasKey = 1;
+                                floorRoomCount--;
+                                gp.ui.floorRoomCount = floorRoomCount;
+                                worldX = 1100;
+                                worldY = 1000;
+                                for (int j = 0; j < 8; j++) {
+                                    gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+                                }
+
+                                gp.obj[1]= new OBJ_Key();
+                                gp.obj[1].worldX = 23* gp.tileSize;
+                                gp.obj[1].worldY = 23*gp.tileSize;
+
+                                gp.obj[2]  = new OBJ_Door();
+                                gp.obj[2].worldX = 38 * gp.tileSize;
+                                gp.obj[2].worldY = 21*gp.tileSize;
+
+                                gp.obj[3]  = new OBJ_Chest();
+                                gp.obj[3].worldX = 30 * gp.tileSize;
+                                gp.obj[3].worldY = 23 *gp.tileSize;
+
+                                gp.obj[4]  = new OBJ_Chest();
+                                gp.obj[4].worldX = 32 * gp.tileSize;
+                                gp.obj[4].worldY = 23 *gp.tileSize;
+
+                                gp.obj[5]  = new OBJ_Chest();
+                                gp.obj[5].worldX = 28 * gp.tileSize;
+                                gp.obj[5].worldY = 23 *gp.tileSize;
+
+                                gp.obj[6] = new OBJ_LockedChest();
+                                gp.obj[6].worldX = 30 * gp.tileSize;
+                                gp.obj[6].worldY = 19 *gp.tileSize;
+
+                                gp.tileM.loadMap("/maps/TreasureRoom.txt");
+                            }
+                            hasKey--;
+                            gp.ui.showMessage("You opened the Door!");
                         }
-                        hasKey--;
-                        gp.ui.showMessage("You opened the door!");
+
                     }
                     else{
-                        gp.ui.showMessage("You need a key");
+                        gp.ui.showMessage("You need a Key.");
                     }
-                    System.out.println("Key: "+ hasKey);
                     break;
-                case "Boots":
-                    gp.playSE(2);
-                    speed += 2; //change this number for different speed boost
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Speed up!");
-                    break;
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
+                case "Ladder":
+                    highRoomCount++;
+                    lowRoomCount++;
+
+                    worldX = 1100;
+                    worldY = 1000;
+
+                    for (int j = 0; j < 8; j++) {
+                        gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+                    }
+
+                    gp.obj[1]= new OBJ_Key();
+                    gp.obj[1].worldX = 23* gp.tileSize;
+                    gp.obj[1].worldY = 17*gp.tileSize;
+
+                    gp.obj[2]  = new OBJ_Door();
+                    gp.obj[2].worldX = 29 * gp.tileSize;
+                    gp.obj[2].worldY = 21*gp.tileSize;
+
+                    gp.npc[3]=new NPC_OldMan(gp);
+                    gp.npc[3].worldX = gp.tileSize* 19;
+                    gp.npc[3].worldY = gp.tileSize*21;
+
+                    floorCount++;
+                    gp.ui.floor = floorCount;
+                    maxRoomCount = random.nextInt(highRoomCount - lowRoomCount) + lowRoomCount;
+                    gp.ui.maxFloorRoomCount = maxRoomCount;
+                    gp.ui.floorRoomCount = maxRoomCount;
+                    floorRoomCount = maxRoomCount;
+
+                    gp.tileM.loadMap("/maps/StartRoom.txt");
                     break;
 
+                case "LockedChest":
+                    if (open == true) {
+                        gp.ui.showMessage("You have opened this Chest.");
+                    }
+                    else if (hasKey >0 && open == false){
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/LockedChestOpen.png"));
+                            gp.ui.showMessage("You have opened this Chest.");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        //DROP LOOT
+                        hasKey--;
+                        open = true;
+                    }
+                    else if (hasKey == 0 && open == false){
+                        gp.ui.showMessage("You need a Key.");
+                    }
+                    break;
+
+                case "Chest":
+                    try {
+                        gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    gp.ui.showMessage("You have opened this Chest.");
+                    //DROP LOOT
+                    }
+                }
             }
-        }
-    }
     public void interactNPC(int i){
         if(i != 999){
             if(gp.keyH.enterPressed == true) {

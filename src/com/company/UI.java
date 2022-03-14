@@ -18,6 +18,9 @@ public class UI {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int floor = 1;
+    public int floorRoomCount = 1;
+    public int maxFloorRoomCount = 1;
 
     double playTime;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
@@ -88,7 +91,13 @@ public class UI {
 
                 //TIME
                 playTime += (double) 1 / 60;
-                g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 11, 65);
+                g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 11, 135);
+
+                //FLOOR
+                g2.drawString("Floor "+floor, gp.tileSize * 11, 65);
+
+                //ROOM
+                g2.drawString("Room "+(maxFloorRoomCount - floorRoomCount)+"/"+(maxFloorRoomCount + 1), gp.tileSize * 11, 100);
 
                 //MESSAGE
                 if (messageOn) {
