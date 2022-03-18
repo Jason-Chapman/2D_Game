@@ -70,7 +70,6 @@ public class Player extends Entity {
         catch(IOException e){
             e.printStackTrace();
         }
-
     }
 
     public void update() {
@@ -294,6 +293,10 @@ public class Player extends Entity {
                     gp.npc[3].worldX = gp.tileSize* 19;
                     gp.npc[3].worldY = gp.tileSize*21;
 
+                    gp.obj[4]=new OBJ_HealthPotion();
+                    gp.obj[4].worldX = gp.tileSize* 23;
+                    gp.obj[4].worldY = gp.tileSize*25;
+
                     floorCount++;
                     gp.ui.floor = floorCount;
                     maxRoomCount = random.nextInt(highRoomCount - lowRoomCount) + lowRoomCount;
@@ -331,7 +334,19 @@ public class Player extends Entity {
                         e.printStackTrace();
                     }
                     gp.ui.showMessage("You have opened this Chest.");
+                    break;
                     //DROP LOOT
+                case "HealthPotion":
+                    life = maxLife;
+                    gp.obj[i]= null;
+                    System.out.println("max: "+maxLife);
+                    System.out.println("current: "+life);
+                    break;
+                case "HealthIncrease":
+                    maxLife++;
+                    gp.obj[i]= null;
+                    System.out.println("max: "+maxLife);
+                    System.out.println("current: "+life);
                     }
                 }
             }

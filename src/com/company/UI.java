@@ -174,11 +174,7 @@ public class UI {
             }
             i++;
             x+= gp.tileSize;
-
-
-
         }
-
     }
     public void drawTitleScreen(){
         g2.setColor(new Color(0,0,0));
