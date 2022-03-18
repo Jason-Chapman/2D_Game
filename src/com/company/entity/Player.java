@@ -347,6 +347,13 @@ public class Player extends Entity {
                     gp.obj[i]= null;
                     System.out.println("max: "+maxLife);
                     System.out.println("current: "+life);
+                case "Spikes":
+                    System.out.println(gp.getFPS());
+//                    gp.setFPS(60);
+                    System.out.println(gp.getFPS());
+                    life--;
+                    System.out.println("max: "+maxLife);
+                    System.out.println("current: "+life);
                     }
                 }
             }

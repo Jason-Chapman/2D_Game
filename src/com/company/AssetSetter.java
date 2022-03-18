@@ -40,6 +40,10 @@ public class AssetSetter {
         gp.obj[6]=new OBJ_HealthIncrease();
         gp.obj[6].worldX = gp.tileSize* 18;
         gp.obj[6].worldY = gp.tileSize*25;
+
+        gp.obj[7]=new OBJ_Spikes();
+        gp.obj[7].worldX = gp.tileSize* 18;
+        gp.obj[7].worldY = gp.tileSize*23;
     }
     public void setNPC(){
         gp.npc[0]=new NPC_OldMan(gp);
