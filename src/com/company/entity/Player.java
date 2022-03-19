@@ -54,6 +54,7 @@ public class Player extends Entity {
         // PLAYER STATUS
         maxLife = 6;
         life = maxLife;
+
     }
 
     public void getPlayerImage() {
@@ -293,9 +294,9 @@ public class Player extends Entity {
                     gp.npc[3].worldX = gp.tileSize* 19;
                     gp.npc[3].worldY = gp.tileSize*21;
 
-                    gp.obj[4]=new OBJ_HealthPotion();
-                    gp.obj[4].worldX = gp.tileSize* 23;
-                    gp.obj[4].worldY = gp.tileSize*25;
+                    //gp.obj[4]=new OBJ_HealthPotion();
+                  //  gp.obj[4].worldX = gp.tileSize* 23;
+                    //gp.obj[4].worldY = gp.tileSize*25;
 
                     floorCount++;
                     gp.ui.floor = floorCount;
