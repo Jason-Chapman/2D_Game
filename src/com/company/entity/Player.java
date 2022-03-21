@@ -22,6 +22,7 @@ public class Player extends Entity {
     int floorRoomCount = 1;
     int maxRoomCount = 3;
     boolean open = false;
+    int cooldown = 0;
 
     public final int screenX;
     public final int screenY;
@@ -154,7 +155,7 @@ public class Player extends Entity {
                             worldX = 1100;
                             worldY = 1000;
 
-                            for (int j = 0; j < 8; j++) {
+                            for (int j = 0; j < 1000; j++) {
                                 gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                             }
 
@@ -174,7 +175,7 @@ public class Player extends Entity {
                                 gp.ui.floorRoomCount = floorRoomCount;
                                 worldX = 1100;
                                 worldY = 1000;
-                                for (int j = 0; j < 8; j++) {
+                                for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                                 }
 
@@ -189,21 +190,60 @@ public class Player extends Entity {
                                 gp.tileM.loadMap("/maps/CombatRoom.txt");
                             }
                             else if (nextRoom == 4) { //TRAP ROOM CHOSEN
+                                int temp = 5;
                                 floorRoomCount--;
                                 gp.ui.floorRoomCount = floorRoomCount;
                                 worldX = 1100;
                                 worldY = 1000;
-                                for (int j = 0; j < 8; j++) {
+                                for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                                 }
 
                                 gp.obj[1]= new OBJ_Key();
-                                gp.obj[1].worldX = 23* gp.tileSize;
-                                gp.obj[1].worldY = 23*gp.tileSize;
+                                gp.obj[1].worldX = 28* gp.tileSize;
+                                gp.obj[1].worldY = 24*gp.tileSize;
 
                                 gp.obj[2]  = new OBJ_Door();
                                 gp.obj[2].worldX = 42 * gp.tileSize;
                                 gp.obj[2].worldY = 8*gp.tileSize;
+
+                                gp.obj[3]= new OBJ_Key();
+                                gp.obj[3].worldX = 36* gp.tileSize;
+                                gp.obj[3].worldY = 14*gp.tileSize;
+
+                                gp.obj[4]= new OBJ_Key();
+                                gp.obj[4].worldX = 32* gp.tileSize;
+                                gp.obj[4].worldY = 12*gp.tileSize;
+
+                                for (int j = 23; j < 38; j++) {
+                                    for (int k = 7; k < 27; k++) {
+                                        if (((k == 8) && ((j>=28 && j<=31) || (j>=34 && j<=37)))
+                                                || ((k == 9) && ((j==28) || (j>=31 && j<=34)))
+                                                || ((k == 10) && (j==28))
+                                                || ((k == 11) && ((j==28) || (j>=31 && j<=33)))
+                                                || ((k == 12) && ((j>=26 && j<=33)))
+                                                || ((k == 13) && ((j==26) || (j>=31 && j<=33) || (j>=35 && j<=37)))
+                                                || ((k == 14) && ((j==26) || (j>=35 && j<=37)))
+                                                || ((k == 15) && ((j==26) || (j>=35 && j<=37)))
+                                                || ((k == 16) && ((j>=26 && j<=32) || (j==36)))
+                                                || ((k == 17) && ((j==32) || (j>=35 && j<=36)))
+                                                || ((k == 18) && ((j==32) || (j==35)))
+                                                || ((k == 19) && ((j==32) || (j>=35 && j<=36)))
+                                                || ((k == 20) && ((j==36 || j==32)))
+                                                || ((k == 21) && ((j>=23 && j<=33) || (j==36)))
+                                                || ((k == 22) && (j>=33 && j<=36))
+                                                || ((k == 23) && ((j>=27 && j<=29) || (j==33)))
+                                                || ((k == 24) && ((j>=27 && j<=33)))
+                                                || ((k == 25) && ((j>=27 && j<=29)))) {
+                                        }
+                                        else {
+                                            gp.obj[temp]= new OBJ_Spikes();
+                                            gp.obj[temp].worldX = (j)* gp.tileSize;
+                                            gp.obj[temp].worldY = (k)*gp.tileSize;
+                                        }
+                                        temp++;
+                                    }
+                                }
 
                                 gp.tileM.loadMap("/maps/TrapRoom1.txt");
                             }
@@ -212,7 +252,7 @@ public class Player extends Entity {
                                 gp.ui.floorRoomCount = floorRoomCount;
                                 worldX = 1100;
                                 worldY = 1000;
-                                for (int j = 0; j < 8; j++) {
+                                for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                                 }
 
@@ -232,7 +272,7 @@ public class Player extends Entity {
                                 gp.ui.floorRoomCount = floorRoomCount;
                                 worldX = 1100;
                                 worldY = 1000;
-                                for (int j = 0; j < 8; j++) {
+                                for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                                 }
 
@@ -278,7 +318,7 @@ public class Player extends Entity {
                     worldX = 1100;
                     worldY = 1000;
 
-                    for (int j = 0; j < 8; j++) {
+                    for (int j = 0; j < 1000; j++) {
                         gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                     }
 
@@ -340,21 +380,20 @@ public class Player extends Entity {
                 case "HealthPotion":
                     life = maxLife;
                     gp.obj[i]= null;
-                    System.out.println("max: "+maxLife);
-                    System.out.println("current: "+life);
                     break;
                 case "HealthIncrease":
-                    maxLife++;
+                    maxLife+=2;
                     gp.obj[i]= null;
-                    System.out.println("max: "+maxLife);
-                    System.out.println("current: "+life);
+                    break;
                 case "Spikes":
-                    System.out.println(gp.getFPS());
-//                    gp.setFPS(60);
-                    System.out.println(gp.getFPS());
-                    life--;
-                    System.out.println("max: "+maxLife);
-                    System.out.println("current: "+life);
+                    if (cooldown == 0){
+                        life--;
+                    }
+                    cooldown++;
+                    System.out.println(cooldown);
+                    if ((cooldown % 60) == 0){
+                        life--;
+                    }
                     }
                 }
             }
