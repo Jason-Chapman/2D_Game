@@ -143,6 +143,14 @@ public class UI {
                 drawPlayerLife();
                 drawDialogueScreen();
             }
+            // FIGHT STATE
+            if(gp.gameState == gp.fightState){
+                drawFightScreen();
+            }
+            // POST FIGHT STATE
+            if(gp.gameState == gp.fightEndState){
+                drawEndBattleScrren();
+            }
 
 
         }
@@ -228,6 +236,84 @@ public class UI {
     public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
         String text = "PAUSED";
+        int x = getXforCenteredText(text);
+
+
+        int y = gp.screenHeight/2;
+
+        g2.drawString(text, x, y);
+    }
+    public void drawFightScreen(){
+        g2.setColor(new Color(0,0,0));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+        //TITLE NAME
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+        String text = "FIGHT!";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize*3;
+        // SHADOW COLOUR
+        g2.setColor(Color.gray);
+        g2.drawString(text, x+5, y+5);
+
+        // MAIN COLOUR
+        g2.setColor(Color.white);
+        g2.drawString(text, x,y);
+
+        // CHARACTER IMAGE
+        x = gp.screenWidth/2 - (gp.tileSize*2)*2;
+        y += gp.tileSize*2;
+        g2.drawImage(gp.player.down1, x,y,gp.tileSize*2,gp.tileSize*2,null);
+
+        // PLAYER HEALTH
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,11F));
+        text = "player life : "+gp.player.life;
+        y-=10;
+        g2.drawString(text,x,y);
+
+        // ENEMY IMAGE
+        x = gp.screenWidth/2 - (gp.tileSize*2)/8;
+
+        g2.drawImage(gp.npc[1].down1, x,y,gp.tileSize*2,gp.tileSize*2,null);
+        //ENEMY LIFE
+        text = "enemy life : "+gp.npc[0].life;
+
+        g2.drawString(text,x,y);
+
+
+
+        // MENU
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,48F));
+
+
+
+
+        text = "ATTACK";
+        x = getXforCenteredText(text);
+        y += gp.tileSize*3.5;
+        g2.drawString(text,x,y);
+        if(commandNum == 0) {
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+
+        text = "GUARD";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if(commandNum == 1) {
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+
+        text = "RUN";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if(commandNum == 2) {
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+    }
+    public void drawEndBattleScrren(){
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
+        String text = "YOU WIN!";
         int x = getXforCenteredText(text);
 
 

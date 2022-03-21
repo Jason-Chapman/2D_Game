@@ -2,6 +2,7 @@ package com.company;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 public class KeyHandler implements KeyListener {
   GamePanel gp;
@@ -24,6 +25,7 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        Random random = new Random();
 
         int code = e.getKeyCode();
         //TITLE STATE
@@ -90,6 +92,58 @@ public class KeyHandler implements KeyListener {
         else if (gp.gameState == gp.dialogueState) {
             if (code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
+            }
+        }
+        // FIGHT END STATE
+        else if(gp.gameState == gp.fightEndState){
+            if(code == KeyEvent.VK_ENTER){
+                gp.gameState = gp.playState;
+            }
+        }
+        // FIGHT STATE
+        else if(gp.gameState == gp.fightState){
+            if (code == KeyEvent.VK_W) {
+                gp.ui.commandNum--;
+                if(gp.ui.commandNum<0){
+                    gp.ui.commandNum=2;
+                }
+            }
+            if (code == KeyEvent.VK_S) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 2) {
+                    gp.ui.commandNum = 0;
+
+                }
+            }
+            if(code == KeyEvent.VK_ENTER){
+                if(gp.ui.commandNum == 0){
+
+                    int i = random.nextInt(3);
+                    gp.npc[0].life -= i;
+                    gp.gameState = gp.pauseState;
+                    gp.gameState = gp.fightState;
+                    if(gp.npc[0].life <= 0){
+                        gp.npc[0].life = gp.npc[0].maxLife;
+
+
+                        gp.gameState = gp.fightEndState;
+
+                    }
+                    else{
+                        i = random.nextInt(2);
+                        gp.player.life -= i;
+
+                    }
+
+                }
+                if(gp.ui.commandNum == 1){
+                    int i = random.nextInt(1);
+                    gp.player.life -= i;
+
+                }
+                if (gp.ui.commandNum==2){
+                    gp.gameState =gp.playState;
+                }
             }
         }
     }

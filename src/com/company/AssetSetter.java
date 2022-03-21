@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.entity.NPC_OldMan;
+import com.company.monster.MON_GreenSlime;
 import object.*;
 
 public class AssetSetter {
@@ -51,5 +52,11 @@ public class AssetSetter {
         gp.npc[0] = new NPC_OldMan(gp);
         gp.npc[0].worldX = gp.tileSize * 19;
         gp.npc[0].worldY = gp.tileSize * 21;
+    }
+    public void setMon(){
+        gp.npc[1] = new MON_GreenSlime(gp);
+        gp.npc[1].worldX = gp.tileSize * 20;
+        gp.npc[0].worldY = gp.tileSize * 21;
+
     }
 }

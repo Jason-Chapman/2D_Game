@@ -11,6 +11,8 @@ public class NPC_OldMan extends Entity {
         super(gp);
 
         direction = "down";
+        maxLife = 4;
+        life = maxLife;
         speed = 1;
         getImage();
         setDialogue();
