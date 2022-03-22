@@ -21,7 +21,10 @@ public class Player extends Entity {
     int lowRoomCount = 1;
     int floorRoomCount = 1;
     int maxRoomCount = 3;
-    boolean open = false;
+    boolean lockedOpen = false;
+    boolean regularOpen = false;
+    boolean regularOpen2 = false;
+    boolean regularOpen3 = false;
     int cooldown = 0;
 
     public final int screenX;
@@ -267,7 +270,6 @@ public class Player extends Entity {
                                 gp.tileM.loadMap("/maps/TrapRoom2.txt");
                             }
                             else if (nextRoom == 6) { //TREASURE ROOM CHOSEN
-                                hasKey = 1;
                                 floorRoomCount--;
                                 gp.ui.floorRoomCount = floorRoomCount;
                                 worldX = 1100;
@@ -288,11 +290,11 @@ public class Player extends Entity {
                                 gp.obj[3].worldX = 30 * gp.tileSize;
                                 gp.obj[3].worldY = 23 *gp.tileSize;
 
-                                gp.obj[4]  = new OBJ_Chest();
+                                gp.obj[4]  = new OBJ_Chest2();
                                 gp.obj[4].worldX = 32 * gp.tileSize;
                                 gp.obj[4].worldY = 23 *gp.tileSize;
 
-                                gp.obj[5]  = new OBJ_Chest();
+                                gp.obj[5]  = new OBJ_Chest3();
                                 gp.obj[5].worldX = 28 * gp.tileSize;
                                 gp.obj[5].worldY = 23 *gp.tileSize;
 
@@ -334,10 +336,6 @@ public class Player extends Entity {
                     gp.npc[3].worldX = gp.tileSize* 19;
                     gp.npc[3].worldY = gp.tileSize*21;
 
-                    //gp.obj[4]=new OBJ_HealthPotion();
-                  //  gp.obj[4].worldX = gp.tileSize* 23;
-                    //gp.obj[4].worldY = gp.tileSize*25;
-
                     floorCount++;
                     gp.ui.floor = floorCount;
                     maxRoomCount = random.nextInt(highRoomCount - lowRoomCount) + lowRoomCount;
@@ -349,34 +347,200 @@ public class Player extends Entity {
                     break;
 
                 case "LockedChest":
-                    if (open == true) {
+                    if (lockedOpen == true) {
                         gp.ui.showMessage("You have opened this Chest.");
                     }
-                    else if (hasKey >0 && open == false){
+                    else if (hasKey >0 && lockedOpen == false){
                         try {
+                            int chestDrop = random.nextInt(3);
+
+                            if (chestDrop == 0) {
+                                gp.obj[0] = new OBJ_HealthIncrease();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
+                            }
+                            else if (chestDrop == 1) {
+                                gp.obj[0] = new OBJ_Sword();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
+                            }
+                            else if (chestDrop == 2) {
+                                gp.obj[0] = new OBJ_Shield();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
+                            }
                             gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/LockedChestOpen.png"));
                             gp.ui.showMessage("You have opened this Chest.");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        //DROP LOOT
                         hasKey--;
-                        open = true;
+                        lockedOpen = true;
                     }
-                    else if (hasKey == 0 && open == false){
+                    else if (hasKey == 0 && lockedOpen == false){
                         gp.ui.showMessage("You need a Key.");
                     }
                     break;
 
                 case "Chest":
-                    try {
-                        gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (regularOpen == true) {
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        gp.ui.showMessage("You have opened this Chest.");
                     }
-                    gp.ui.showMessage("You have opened this Chest.");
+                    else if (regularOpen == false){
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        regularOpen = true;
+                        int chestDrop = random.nextInt(9);
+
+                        if (chestDrop == 0) {
+                            gp.obj[0] = new OBJ_HealthIncrease();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        if (chestDrop == 1) {
+                            gp.obj[0] = new OBJ_Sword();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        if (chestDrop == 2) {
+                            gp.obj[0] = new OBJ_Shield();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        else if (chestDrop != 0) {
+                            chestDrop = random.nextInt(3);
+                            if (chestDrop == 0) {
+                                gp.obj[0] = new OBJ_HealthPotion();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                            if (chestDrop == 1) {
+                                gp.obj[0] = new OBJ_Bolt();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                            if (chestDrop == 2) {
+                                gp.obj[0] = new OBJ_Key();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                        }
+                    }
                     break;
-                    //DROP LOOT
+                case "Chest2":
+                    if (regularOpen2 == true) {
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        gp.ui.showMessage("You have opened this Chest.");
+                    }
+                    else if (regularOpen2 == false){
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        regularOpen2 = true;
+                        int chestDrop = random.nextInt(9);
+
+                        if (chestDrop == 0) {
+                            gp.obj[0] = new OBJ_HealthIncrease();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        if (chestDrop == 1) {
+                            gp.obj[0] = new OBJ_Sword();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        if (chestDrop == 2) {
+                            gp.obj[0] = new OBJ_Shield();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        else if (chestDrop != 0) {
+                            chestDrop = random.nextInt(3);
+                            if (chestDrop == 0) {
+                                gp.obj[0] = new OBJ_HealthPotion();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                            if (chestDrop == 1) {
+                                gp.obj[0] = new OBJ_Bolt();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                            if (chestDrop == 2) {
+                                gp.obj[0] = new OBJ_Key();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                        }
+                    }
+                    break;
+                case "Chest3":
+                    if (regularOpen3 == true) {
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        gp.ui.showMessage("You have opened this Chest.");
+                    }
+                    else if (regularOpen3 == false){
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        regularOpen3 = true;
+                        int chestDrop = random.nextInt(9);
+
+                        if (chestDrop == 0) {
+                            gp.obj[0] = new OBJ_HealthIncrease();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        if (chestDrop == 1) {
+                            gp.obj[0] = new OBJ_Sword();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        if (chestDrop == 2) {
+                            gp.obj[0] = new OBJ_Shield();
+                            gp.obj[0].worldX = 30 * gp.tileSize;
+                            gp.obj[0].worldY = 21*gp.tileSize;
+                        }
+                        else if (chestDrop != 0) {
+                            chestDrop = random.nextInt(3);
+                            if (chestDrop == 0) {
+                                gp.obj[0] = new OBJ_HealthPotion();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                            if (chestDrop == 1) {
+                                gp.obj[0] = new OBJ_Bolt();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                            if (chestDrop == 2) {
+                                gp.obj[0] = new OBJ_Key();
+                                gp.obj[0].worldX = 30 * gp.tileSize;
+                                gp.obj[0].worldY = 21 * gp.tileSize;
+                            }
+                        }
+                    }
+                    break;
                 case "HealthPotion":
                     life = maxLife;
                     gp.obj[i]= null;
