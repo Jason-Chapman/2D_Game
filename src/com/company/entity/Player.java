@@ -290,11 +290,11 @@ public class Player extends Entity {
                                 gp.obj[3].worldX = 30 * gp.tileSize;
                                 gp.obj[3].worldY = 23 *gp.tileSize;
 
-                                gp.obj[4]  = new OBJ_Chest2();
+                                gp.obj[4]  = new OBJ_Chest();
                                 gp.obj[4].worldX = 32 * gp.tileSize;
                                 gp.obj[4].worldY = 23 *gp.tileSize;
 
-                                gp.obj[5]  = new OBJ_Chest3();
+                                gp.obj[5]  = new OBJ_Chest();
                                 gp.obj[5].worldX = 28 * gp.tileSize;
                                 gp.obj[5].worldY = 23 *gp.tileSize;
 
@@ -383,160 +383,162 @@ public class Player extends Entity {
                     break;
 
                 case "Chest":
-                    if (regularOpen == true) {
-                        try {
-                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    if (gp.obj[i].worldX == 28 * gp.tileSize) {
+                        if (regularOpen == true) {
+                            try {
+                                gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            gp.ui.showMessage("You have opened this Chest.");
                         }
-                        gp.ui.showMessage("You have opened this Chest.");
-                    }
-                    else if (regularOpen == false){
-                        try {
-                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        regularOpen = true;
-                        int chestDrop = random.nextInt(9);
+                        else if (regularOpen == false){
+                            try {
+                                gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            regularOpen = true;
+                            int chestDrop = random.nextInt(9);
 
-                        if (chestDrop == 0) {
-                            gp.obj[0] = new OBJ_HealthIncrease();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        if (chestDrop == 1) {
-                            gp.obj[0] = new OBJ_Sword();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        if (chestDrop == 2) {
-                            gp.obj[0] = new OBJ_Shield();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        else if (chestDrop != 0) {
-                            chestDrop = random.nextInt(3);
                             if (chestDrop == 0) {
-                                gp.obj[0] = new OBJ_HealthPotion();
+                                gp.obj[0] = new OBJ_HealthIncrease();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
                             }
                             if (chestDrop == 1) {
-                                gp.obj[0] = new OBJ_Bolt();
+                                gp.obj[0] = new OBJ_Sword();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
                             }
                             if (chestDrop == 2) {
-                                gp.obj[0] = new OBJ_Key();
+                                gp.obj[0] = new OBJ_Shield();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
+                            }
+                            else if (chestDrop != 0) {
+                                chestDrop = random.nextInt(3);
+                                if (chestDrop == 0) {
+                                    gp.obj[0] = new OBJ_HealthPotion();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
+                                if (chestDrop == 1) {
+                                    gp.obj[0] = new OBJ_Bolt();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
+                                if (chestDrop == 2) {
+                                    gp.obj[0] = new OBJ_Key();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
                             }
                         }
                     }
-                    break;
-                case "Chest2":
-                    if (regularOpen2 == true) {
-                        try {
-                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    if (gp.obj[i].worldX == 30 * gp.tileSize) {
+                        if (regularOpen2 == true) {
+                            try {
+                                gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            gp.ui.showMessage("You have opened this Chest.");
                         }
-                        gp.ui.showMessage("You have opened this Chest.");
-                    }
-                    else if (regularOpen2 == false){
-                        try {
-                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        regularOpen2 = true;
-                        int chestDrop = random.nextInt(9);
+                        else if (regularOpen2 == false){
+                            try {
+                                gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            regularOpen2 = true;
+                            int chestDrop = random.nextInt(9);
 
-                        if (chestDrop == 0) {
-                            gp.obj[0] = new OBJ_HealthIncrease();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        if (chestDrop == 1) {
-                            gp.obj[0] = new OBJ_Sword();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        if (chestDrop == 2) {
-                            gp.obj[0] = new OBJ_Shield();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        else if (chestDrop != 0) {
-                            chestDrop = random.nextInt(3);
                             if (chestDrop == 0) {
-                                gp.obj[0] = new OBJ_HealthPotion();
+                                gp.obj[0] = new OBJ_HealthIncrease();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
                             }
                             if (chestDrop == 1) {
-                                gp.obj[0] = new OBJ_Bolt();
+                                gp.obj[0] = new OBJ_Sword();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
                             }
                             if (chestDrop == 2) {
-                                gp.obj[0] = new OBJ_Key();
+                                gp.obj[0] = new OBJ_Shield();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
+                            }
+                            else if (chestDrop != 0) {
+                                chestDrop = random.nextInt(3);
+                                if (chestDrop == 0) {
+                                    gp.obj[0] = new OBJ_HealthPotion();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
+                                if (chestDrop == 1) {
+                                    gp.obj[0] = new OBJ_Bolt();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
+                                if (chestDrop == 2) {
+                                    gp.obj[0] = new OBJ_Key();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
                             }
                         }
                     }
-                    break;
-                case "Chest3":
-                    if (regularOpen3 == true) {
-                        try {
-                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    if (gp.obj[i].worldX == 32 * gp.tileSize) {
+                        if (regularOpen3 == true) {
+                            try {
+                                gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            gp.ui.showMessage("You have opened this Chest.");
                         }
-                        gp.ui.showMessage("You have opened this Chest.");
-                    }
-                    else if (regularOpen3 == false){
-                        try {
-                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        regularOpen3 = true;
-                        int chestDrop = random.nextInt(9);
+                        else if (regularOpen3 == false){
+                            try {
+                                gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            regularOpen3 = true;
+                            int chestDrop = random.nextInt(9);
 
-                        if (chestDrop == 0) {
-                            gp.obj[0] = new OBJ_HealthIncrease();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        if (chestDrop == 1) {
-                            gp.obj[0] = new OBJ_Sword();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        if (chestDrop == 2) {
-                            gp.obj[0] = new OBJ_Shield();
-                            gp.obj[0].worldX = 30 * gp.tileSize;
-                            gp.obj[0].worldY = 21*gp.tileSize;
-                        }
-                        else if (chestDrop != 0) {
-                            chestDrop = random.nextInt(3);
                             if (chestDrop == 0) {
-                                gp.obj[0] = new OBJ_HealthPotion();
+                                gp.obj[0] = new OBJ_HealthIncrease();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
                             }
                             if (chestDrop == 1) {
-                                gp.obj[0] = new OBJ_Bolt();
+                                gp.obj[0] = new OBJ_Sword();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
                             }
                             if (chestDrop == 2) {
-                                gp.obj[0] = new OBJ_Key();
+                                gp.obj[0] = new OBJ_Shield();
                                 gp.obj[0].worldX = 30 * gp.tileSize;
-                                gp.obj[0].worldY = 21 * gp.tileSize;
+                                gp.obj[0].worldY = 21*gp.tileSize;
+                            }
+                            else if (chestDrop != 0) {
+                                chestDrop = random.nextInt(3);
+                                if (chestDrop == 0) {
+                                    gp.obj[0] = new OBJ_HealthPotion();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
+                                if (chestDrop == 1) {
+                                    gp.obj[0] = new OBJ_Bolt();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
+                                if (chestDrop == 2) {
+                                    gp.obj[0] = new OBJ_Key();
+                                    gp.obj[0].worldX = 30 * gp.tileSize;
+                                    gp.obj[0].worldY = 21 * gp.tileSize;
+                                }
                             }
                         }
                     }
@@ -552,11 +554,21 @@ public class Player extends Entity {
                 case "Spikes":
                     if (cooldown == 0){
                         life--;
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/Bloody Spikes.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                     cooldown++;
                     System.out.println(cooldown);
-                    if ((cooldown % 60) == 0){
+                    if ((cooldown % 30) == 0){
                         life--;
+                        try {
+                            gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/Bloody Spikes.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                     }
                 }
