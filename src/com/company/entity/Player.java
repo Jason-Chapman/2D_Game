@@ -314,6 +314,7 @@ public class Player extends Entity {
                     }
                     break;
                 case "Ladder":
+                    gp.playSE(5);
                     highRoomCount++;
                     lowRoomCount++;
 
@@ -351,6 +352,7 @@ public class Player extends Entity {
                         gp.ui.showMessage("You have opened this Chest.");
                     }
                     else if (hasKey >0 && lockedOpen == false){
+                        gp.playSE(7);
                         try {
                             int chestDrop = random.nextInt(3);
 
@@ -393,6 +395,7 @@ public class Player extends Entity {
                             gp.ui.showMessage("You have opened this Chest.");
                         }
                         else if (regularOpen == false){
+                            gp.playSE(6);
                             try {
                                 gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
                             } catch (IOException e) {
@@ -446,6 +449,7 @@ public class Player extends Entity {
                             gp.ui.showMessage("You have opened this Chest.");
                         }
                         else if (regularOpen2 == false){
+                            gp.playSE(6);
                             try {
                                 gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
                             } catch (IOException e) {
@@ -499,6 +503,7 @@ public class Player extends Entity {
                             gp.ui.showMessage("You have opened this Chest.");
                         }
                         else if (regularOpen3 == false){
+                            gp.playSE(6);
                             try {
                                 gp.obj[i].image = ImageIO.read(getClass().getResourceAsStream("/objects/ChestOpen.png"));
                             } catch (IOException e) {
@@ -544,10 +549,12 @@ public class Player extends Entity {
                     }
                     break;
                 case "HealthPotion":
+                    gp.playSE(1);
                     life = maxLife;
                     gp.obj[i]= null;
                     break;
                 case "HealthIncrease":
+                    gp.playSE(1);
                     maxLife+=2;
                     gp.obj[i]= null;
                     break;
