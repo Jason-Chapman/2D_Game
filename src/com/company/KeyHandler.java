@@ -100,6 +100,13 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.playState;
             }
         }
+        // DEATH STATE
+        else if(gp.gameState == gp.deathState){
+            if(code == KeyEvent.VK_ENTER){
+                gp.gameState = gp.titleState;
+            }
+        }
+
         // FIGHT STATE
         else if(gp.gameState == gp.fightState){
             if (code == KeyEvent.VK_W) {

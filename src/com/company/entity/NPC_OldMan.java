@@ -20,14 +20,14 @@ public class NPC_OldMan extends Entity {
     }
     public void getImage() {
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/npc/npc.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/npc/npc2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/npc/npc3.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/npc/npc4.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/npc/npc5.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/npc/npc6.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/npc/npc7.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/npc/npc8.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieBow1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieBow2.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieBowAttack1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieBowAttack2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieClub 1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieClub2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieClubAttack1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/npc/ZombieClubAttack2.png"));
         }
 
         catch(IOException e){

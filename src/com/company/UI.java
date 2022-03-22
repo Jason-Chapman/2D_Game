@@ -151,6 +151,14 @@ public class UI {
             if(gp.gameState == gp.fightEndState){
                 drawEndBattleScrren();
             }
+            if(gp.player.life==0){
+                gp.gameState= gp.deathState;
+
+            }
+            if (gp.gameState==gp.deathState){
+                drawDeathScreen();
+                gp.player.life=gp.player.maxLife;
+            }
 
 
         }
@@ -265,14 +273,13 @@ public class UI {
         g2.drawImage(gp.player.down1, x,y,gp.tileSize*2,gp.tileSize*2,null);
 
         // PLAYER HEALTH
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD,11F));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,16F));
         text = "player life : "+gp.player.life;
         y-=10;
         g2.drawString(text,x,y);
 
         // ENEMY IMAGE
-        x = gp.screenWidth/2 - (gp.tileSize*2)/8;
-
+        x =+ gp.tileSize*10;
         g2.drawImage(gp.npc[1].down1, x,y,gp.tileSize*2,gp.tileSize*2,null);
         //ENEMY LIFE
         text = "enemy life : "+gp.npc[0].life;
@@ -318,6 +325,16 @@ public class UI {
 
 
         int y = gp.screenHeight/2;
+
+        g2.drawString(text, x, y);
+    }
+    public void drawDeathScreen() {
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
+        String text = "YOU DIED!";
+        int x = getXforCenteredText(text);
+
+
+        int y = gp.screenHeight / 2;
 
         g2.drawString(text, x, y);
     }
