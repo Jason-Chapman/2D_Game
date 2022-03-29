@@ -14,7 +14,6 @@ public class OBJ_Sword extends SuperObject{
         }catch (IOException e) {
             e.printStackTrace();
         }
-        collision = true;
     }
 
 }

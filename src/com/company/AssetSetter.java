@@ -19,33 +19,29 @@ public class AssetSetter {
         gp.obj[0].worldX = 23 * gp.tileSize;
         gp.obj[0].worldY = 17 * gp.tileSize;
 
+        gp.obj[8] = new OBJ_Sword();
+        gp.obj[8].worldX = 26 * gp.tileSize;
+        gp.obj[8].worldY = 18 * gp.tileSize;
+
+        gp.obj[11] = new OBJ_Shield();
+        gp.obj[11].worldX = 20 * gp.tileSize;
+        gp.obj[11].worldY = 18 * gp.tileSize;
+
         gp.obj[1] = new OBJ_Door();
         gp.obj[1].worldX = 29 * gp.tileSize;
         gp.obj[1].worldY = 21 * gp.tileSize;
 
-        gp.obj[2] = new OBJ_HealthPotion();
-        gp.obj[2].worldX = gp.tileSize * 23;
-        gp.obj[2].worldY = gp.tileSize * 25;
-
-        gp.obj[4] = new OBJ_HealthPotion();
-        gp.obj[4].worldX = gp.tileSize * 24;
-        gp.obj[4].worldY = gp.tileSize * 25;
-
         gp.obj[5] = new OBJ_HealthPotion();
-        gp.obj[5].worldX = gp.tileSize * 25;
-        gp.obj[5].worldY = gp.tileSize * 25;
-
-        gp.obj[3] = new OBJ_HealthIncrease();
-        gp.obj[3].worldX = gp.tileSize * 19;
-        gp.obj[3].worldY = gp.tileSize * 25;
+        gp.obj[5].worldX = gp.tileSize * 26;
+        gp.obj[5].worldY = gp.tileSize * 24;
 
         gp.obj[6] = new OBJ_HealthIncrease();
-        gp.obj[6].worldX = gp.tileSize * 18;
-        gp.obj[6].worldY = gp.tileSize * 25;
+        gp.obj[6].worldX = gp.tileSize * 20;
+        gp.obj[6].worldY = gp.tileSize * 24;
 
         gp.obj[7] = new OBJ_Spikes();
-        gp.obj[7].worldX = gp.tileSize * 18;
-        gp.obj[7].worldY = gp.tileSize * 23;
+        gp.obj[7].worldX = gp.tileSize * 23;
+        gp.obj[7].worldY = gp.tileSize * 25;
     }
 
     public void setNPC() {

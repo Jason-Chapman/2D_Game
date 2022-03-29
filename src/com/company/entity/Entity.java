@@ -1,11 +1,12 @@
 package com.company.entity;
 
 import com.company.GamePanel;
+import com.company.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Entity {
+public class Entity{
     GamePanel gp;
     public int worldX, worldY;
     public int speed;

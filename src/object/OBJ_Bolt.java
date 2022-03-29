@@ -14,7 +14,6 @@ public class OBJ_Bolt extends SuperObject{
         }catch (IOException e) {
             e.printStackTrace();
         }
-        collision = true;
     }
 
 }

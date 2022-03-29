@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+import static com.company.KeyHandler.stats;
+
 public class Player extends Entity {
 
 
@@ -556,6 +558,7 @@ public class Player extends Entity {
                 case "HealthIncrease":
                     gp.playSE(1);
                     maxLife+=2;
+                    life+=2;
                     gp.obj[i]= null;
                     break;
                 case "Spikes":
@@ -577,6 +580,16 @@ public class Player extends Entity {
                             e.printStackTrace();
                         }
                     }
+                    break;
+                case "Sword":
+                    stats.setDmgLower(stats.getDmgLower()+2);
+                    stats.setDmgUpper(stats.getDmgUpper()+2);
+                    gp.obj[i] = null;
+                    break;
+                case "Shield":
+                    stats.setDefense(stats.getDefense()+1);
+                    gp.obj[i] = null;
+                    break;
                     }
                 }
             }

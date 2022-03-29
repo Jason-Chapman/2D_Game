@@ -10,18 +10,16 @@ public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
 
-
     public KeyHandler (GamePanel gp){
         this.gp = gp;
     }
-
-
-
 
     @Override
     public void keyTyped(KeyEvent e) {
         // NOT USED
     }
+
+    public static Stats stats = new Stats(3, 1, 0);
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -122,33 +120,33 @@ public class KeyHandler implements KeyListener {
 
                 }
             }
-            if(code == KeyEvent.VK_ENTER){
-                if(gp.ui.commandNum == 0){
-
-                    int i = random.nextInt(3);
+            if (code == KeyEvent.VK_ENTER){
+                if(gp.ui.commandNum == 0){ //ATTACK
+                    int i = random.nextInt(stats.getDmgUpper() - stats.getDmgLower()) + stats.getDmgLower(); //DAMAGE DEALT
                     gp.npc[0].life -= i;
                     gp.gameState = gp.pauseState;
                     gp.gameState = gp.fightState;
-                    if(gp.npc[0].life <= 0){
+
+                    if (gp.npc[0].life <= 0){
                         gp.npc[0].life = gp.npc[0].maxLife;
-
-
                         gp.gameState = gp.fightEndState;
-
                     }
-                    else{
-                        i = random.nextInt(2);
+                    else {
+                        i = random.nextInt(2) - stats.getDefense();
+                        if (i < 0) {
+                            i = 1;
+                        }
                         gp.player.life -= i;
-
                     }
-
                 }
-                if(gp.ui.commandNum == 1){
-                    int i = random.nextInt(1);
+                if (gp.ui.commandNum == 1){ //GUARD
+                    int i = random.nextInt(1) - stats.getDefense();
+                    if (i < 0) {
+                        i = 1;
+                    }
                     gp.player.life -= i;
-
                 }
-                if (gp.ui.commandNum==2){
+                if (gp.ui.commandNum==2){ //RUN
                     gp.gameState =gp.playState;
                 }
             }
