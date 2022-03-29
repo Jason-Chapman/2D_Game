@@ -272,6 +272,10 @@ public class Player extends Entity {
                                 gp.tileM.loadMap("/maps/TrapRoom2.txt");
                             }
                             else if (nextRoom == 6) { //TREASURE ROOM CHOSEN
+                                regularOpen = false;
+                                regularOpen2 = false;
+                                regularOpen3 = false;
+                                lockedOpen = false;
                                 floorRoomCount--;
                                 gp.ui.floorRoomCount = floorRoomCount;
                                 worldX = 1100;
@@ -330,6 +334,10 @@ public class Player extends Entity {
                     gp.obj[1]= new OBJ_Key();
                     gp.obj[1].worldX = 23* gp.tileSize;
                     gp.obj[1].worldY = 17*gp.tileSize;
+
+                    gp.obj[4]= new OBJ_HealthPotion();
+                    gp.obj[4].worldX = 23* gp.tileSize;
+                    gp.obj[4].worldY = 25*gp.tileSize;
 
                     gp.obj[2]  = new OBJ_Door();
                     gp.obj[2].worldX = 29 * gp.tileSize;
