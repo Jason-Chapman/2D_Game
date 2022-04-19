@@ -100,6 +100,7 @@ public class UI {
                 g2.drawImage(keyImage, gp.tileSize/2, gp.tileSize/2 *3 , gp.tileSize, gp.tileSize, null);
                 g2.drawString("x  " + gp.player.hasKey, 74, 110);
 
+
                 drawPlayerLife();
 
                 //TIME
@@ -280,7 +281,7 @@ public class UI {
 
         // ENEMY IMAGE
         x =+ gp.tileSize*10;
-        g2.drawImage(gp.npc[1].down1, x,y,gp.tileSize*2,gp.tileSize*2,null);
+        g2.drawImage(gp.npc[1].left1, x,y,gp.tileSize*2,gp.tileSize*2,null);
         //ENEMY LIFE
         text = "enemy life : "+gp.npc[0].life;
 
@@ -319,14 +320,16 @@ public class UI {
         }
     }
     public void drawEndBattleScrren(){
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
-        String text = "YOU WIN!";
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,40F));
+        String text = "YOU WIN AND OBTAINED A KEY!";
         int x = getXforCenteredText(text);
 
 
         int y = gp.screenHeight/2;
 
         g2.drawString(text, x, y);
+        gp.player.hasKey=1;
+
     }
     public void drawDeathScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));

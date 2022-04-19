@@ -162,6 +162,7 @@ public class Player extends Entity {
 
                             for (int j = 0; j < 1000; j++) {
                                 gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+
                             }
 
                             gp.obj[0]= new OBJ_Ladder();
@@ -182,11 +183,13 @@ public class Player extends Entity {
                                 worldY = 1000;
                                 for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
-                                }
 
-                                gp.obj[1]= new OBJ_Key();
-                                gp.obj[1].worldX = 30* gp.tileSize;
-                                gp.obj[1].worldY = 21*gp.tileSize;
+                                }
+                                gp.npc[0]= null;
+
+                                gp.npc[0]= new NPC_OldMan(gp);
+                                gp.npc[0].worldX = 30* gp.tileSize;
+                                gp.npc[0].worldY = 21*gp.tileSize;
 
                                 gp.obj[2]  = new OBJ_Door();
                                 gp.obj[2].worldX = 38 * gp.tileSize;
@@ -202,7 +205,11 @@ public class Player extends Entity {
                                 worldY = 1000;
                                 for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+
+
                                 }
+                                gp.npc[0]=null;
+
 
                                 gp.obj[1]= new OBJ_Key();
                                 gp.obj[1].worldX = 28* gp.tileSize;
@@ -259,7 +266,9 @@ public class Player extends Entity {
                                 worldY = 1000;
                                 for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+
                                 }
+                                gp.npc[0]=null;
 
                                 gp.obj[1]= new OBJ_Key();
                                 gp.obj[1].worldX = 23* gp.tileSize;
@@ -282,7 +291,9 @@ public class Player extends Entity {
                                 worldY = 1000;
                                 for (int j = 0; j < 1000; j++) {
                                     gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
+
                                 }
+                                gp.npc[0]=null;
 
                                 gp.obj[1]= new OBJ_Key();
                                 gp.obj[1].worldX = 23* gp.tileSize;
@@ -330,6 +341,7 @@ public class Player extends Entity {
                     for (int j = 0; j < 1000; j++) {
                         gp.obj[j]= null; // REMOVES ALL OLD ROOM OBJECTS
                     }
+                    gp.npc[0]=null;
 
                     gp.obj[1]= new OBJ_Key();
                     gp.obj[1].worldX = 23* gp.tileSize;
